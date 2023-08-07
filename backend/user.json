@@ -1,0 +1,22 @@
+[{
+    "name":"kika",
+    "email":"ki@gmail.com",
+    "password":"Kika@22",
+    "country":"IND",
+    "state":"Tamil nadu"
+},
+{
+    "name":"priya",
+    "email":"pri@gmail.com",
+    "password":"Priya@22",
+    "country":"USA",
+    "state":"Florida"
+},
+{
+    "name":"pooja",
+    "email":"poj@gmail.com",
+    "password":"Pooja@22",
+    "country":"UK",
+    "state":"Scotland"
+}
+]
