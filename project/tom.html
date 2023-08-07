@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-size: larger; height: 90px;">
+    
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand" href="home.html" style="padding-left: 20px;">
+        <img src="ccc5356effa75abb28f52b9e45a7d37e.jpg" width="30" height="30" alt="">
+        Holidays
+      </a>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav" style="padding-left: 520px;">
+          <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="demo.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="signup.html">Signup</a></li>
+          <li class="nav-item"><a class="nav-link" href="concert.html">Music concert</a></li>
+          <li class="nav-item"><a class="nav-link" href="tour.html">Tourism</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+   </div>
+  </nav>
+  <br>
+  <br><br>
+
+  <h2 style="text-align: center;">Booking Details</h2>
+  <table id="bookingTable" style="margin-left: 100px;width: 90%;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>ID</th>
+        <th>Actions</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody id="bookingTableBody"></tbody>
+  </table>
+  
+
+
+
+  <script>
+
+    
+
+document.addEventListener("DOMContentLoaded", function() {
+      var bookingTableBody = document.getElementById("bookingTableBody");
+      var xhr = new XMLHttpRequest();
+      //console.log(xhr.readyState);
+      // xhr.open("GET","https://reqres.in/api/users",true);
+      //console.log(xhr.readyState);
+      xhr.onreadystatechange = function() {
+        console.log(xhr.readyState);
+        if (xhr.readyState==XMLHttpRequest.DONE && xhr.status==200) {
+          var response = JSON.parse(xhr.responseText);
+          console.log(xhr.responseText);
+          var bookings = response.data;
+          console.log(bookings);
+          bookings.forEach(function(rate) {
+            var row = bookingTableBody.insertRow();
+            row.insertCell().textContent=rate.first_name + " " + rate.last_name;
+            row.insertCell().textContent=rate.email;
+            row.insertCell().textContent=rate.id;
+            var actionsCell=row.insertCell();
+            var updateCell=row.insertCell();
+            var updateButton=document.createElement("button");
+            updateButton.textContent="Update";
+            actionsCell.appendChild(updateButton);
+            updateButton.addEventListener("click", function() {
+                  updateBooking(rate,updateCell);
+                  updateCell.textContent="Booked";
+            });
+          });
+        }
+        //console.log(xhr.readyState);
+        
+      };
+      xhr.open("GET","https://reqres.in/api/users",true);
+      console.log(xhr);
+      xhr.send();
+    });
+
+    function updateBooking(booking,updateCell) {
+          booking.first_name="Tony";
+          booking.last_name="Stark";
+          booking.email="tony@gmail.com";
+          var xhrUpdate=new XMLHttpRequest();
+          xhrUpdate.onreadystatechange=function() {
+              if (xhrUpdate.readyState==XMLHttpRequest.DONE && xhrUpdate.status==200){
+                  console.log("updated");
+              }
+          };
+          xhrUpdate.open("PUT","https://reqres.in/api/users/", true);
+          xhrUpdate.setRequestHeader("Content-Type", "application/json");
+          xhrUpdate.send(JSON.stringify(booking));
+          console.log(xhrUpdate);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+         var bookingTableBody=document.getElementById("bookingTableBody");
+         var xhr=new XMLHttpRequest();
+         xhr.onreadystatechange = function() {
+            if (xhr.readyState==XMLHttpRequest.DONE && xhr.status==201) {
+                    var response = JSON.parse(xhr.responseText);
+                    //console.log(response);
+                    var row =  bookingTableBody.insertRow();
+                    row.insertCell().textContent=response.first_name+" "+response.last_name;
+                   // row.insertCell().textContent=response.last_name;
+                    row.insertCell().textContent=response.email;
+                    row.insertCell().textContent=response.id;
+                    var actionsCell=row.insertCell();
+                    var updateCell=row.insertCell();
+                    var updateButton=document.createElement("button");
+                    updateButton.textContent="Update";
+                    actionsCell.appendChild(updateButton); 
+                    updateButton.addEventListener("click", function() {
+                      updateBooking(booking, updateCell);
+                         updateCell.textContent="Booked";
+                   });      
+            }
+         };
+        var booking = {
+            first_name: "Bill",
+            last_name: "Clinton",
+            email: "bill.clin@gmail.com",
+            id: "7"
+        }; 
+       xhr.open("POST","https://reqres.in/api/users",true);
+       xhr.setRequestHeader("Content-Type", "application/json");
+       var data = JSON.stringify(booking);
+       xhr.send(data);
+       //console.log(data);
+
+});
+
+
+
+</script>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<footer>
+  <div class="box-container">
+    <div class="box">
+      <h3>Contact</h3>
+      <p>Email: keetz@gmail.com</p>
+      <p>Phone: 123-456-7890</p>
+    </div>
+
+    <div class="box">
+      <h3>About</h3>
+      <p>We have a best music consert and tour plans</p>
+    </div>
+
+    <div class="box">
+      <h3>Location</h3>
+      <p>123 Main Street, Dubai Main road, Dubai</p>
+    </div>
+  </div>
+  <br>
+  
+  <p style="color: aliceblue;">&copy; 2023 Keetz holidays. All rights reserved.</p>
+</footer>
+
+  
+</body>
+
+
+
+</html>
+
